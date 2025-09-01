@@ -1,0 +1,66 @@
+instances:
+  - name: pid
+    base_pos: [0.0, 0.0, 0.0]
+    color: [0.15, 0.55, 1.0, 1.0]    # blue
+    controller:
+      type: PID
+      Kp: [60, 50, 40, 30, 20, 15]
+      Ki: [0, 0, 0, 0, 0, 0]
+      Kd: [10, 8, 6, 5, 4, 3]
+    reference:
+      amp_deg: [15, 15, 10, 10, 8, 8]
+      freq_hz: 0.25
+    obstacle:
+      center: [0.60, 0.20, 0.10]
+      d_min: 0.12
+    torque_limit: 80.0
+
+  - name: imp
+    base_pos: [1.2, 0.0, 0.0]
+    color: [0.0, 0.75, 0.35, 1.0]     # green
+    controller:
+      type: Impedance
+      K: [80, 70, 60, 45, 35, 25]
+      D: [12, 10, 8, 6, 5, 4]
+    reference:
+      amp_deg: [20, 15, 12, 10, 8, 8]
+      freq_hz: 0.25
+    obstacle:
+      center: [1.80, 0.20, 0.10]
+      d_min: 0.12
+    torque_limit: 80.0
+
+  - name: smc
+    base_pos: [2.4, 0.0, 0.0]
+    color: [1.0, 0.45, 0.25, 1.0]     # orange
+    controller:
+      type: SMC
+      Lambda: [6, 6, 6, 5, 5, 5]
+      K_sign: [9, 9, 8, 7, 6, 6]
+      Kp: [30, 25, 20, 18, 15, 12]
+      Kd: [6, 5, 4, 4, 3, 3]
+    reference:
+      amp_deg: [12, 18, 12, 10, 8, 8]
+      freq_hz: 0.25
+    obstacle:
+      center: [3.00, 0.20, 0.10]
+      d_min: 0.12
+    torque_limit: 80.0
+
+cbf:
+  rho: 5000
+  joint_barrier:
+    zeta: 0.8
+    omega: 4.0
+
+actuators:
+  default_ctrl_range: [-120, 120]
+  damping: 0.2
+
+sim:
+  dt: 0.002
+  seconds: 12.0
+
+viz:
+  trail_points: 40         # how many EE breadcrumbs to show per robot
+  keep_window_open: true   # don't auto-close viewer
